@@ -15,6 +15,7 @@ public class BaseEntity {
     public int x,y,width,height;
     public BufferedImage sprite;
     public Rectangle bounds;
+    public int health;
     Handler handler;
     Random random;
     Rectangle arena;
@@ -50,7 +51,7 @@ public class BaseEntity {
     }
 
     public void damage(BaseEntity damageSource) {
-    	
+    	health--;
     }
 
 }

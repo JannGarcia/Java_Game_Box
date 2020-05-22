@@ -204,6 +204,13 @@ public class GameSetUp implements Runnable {
             }
         }
         
+        if (handler.getState() instanceof MenuState || handler.getState() instanceof GameState || handler.getState() instanceof PauseState) {
+            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
+            	Handler.DEBUG = !Handler.DEBUG;
+            	System.out.println("DEBUG Mode is now: " + (Handler.DEBUG ? "ON" : "OFF"));
+            }
+        }
+        
         if (keyManager.keyJustPressed(KeyEvent.VK_ESCAPE)) {
         	if (handler.getState() instanceof GalagaState) {
             	handler.getMusicHandler().changeMusic("ChemicalPlantPause.wav");	
