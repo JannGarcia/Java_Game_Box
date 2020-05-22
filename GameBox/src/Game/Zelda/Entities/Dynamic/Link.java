@@ -794,6 +794,7 @@ public class Link extends BaseMovingEntity {
 	public void setDead(boolean a) {this.dead = a;}
 
 
+	@Override
 	public void addHealth(int amount) {
 		this.health += amount;
 

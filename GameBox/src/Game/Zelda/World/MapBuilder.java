@@ -1,7 +1,6 @@
 package Game.Zelda.World;
 
 import Game.GameStates.Zelda.ZeldaMapMakerState;
-import Game.Zelda.Entities.MMBaseEntity;
 import Game.Zelda.Entities.Dynamic.Direction;
 import Game.Zelda.Entities.Dynamic.MMLink;
 import Game.Zelda.Entities.Statics.MMSolidStaticEntities;
@@ -15,10 +14,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class MapBuilder {
@@ -671,7 +668,7 @@ public class MapBuilder {
 				}else if(currentPixel == Link) {
 					MMLink ghost = new MMLink(xPos, yPos, Images.zeldaLinkFrames, handler);
 					mapInCreation.addEnemy(ghost);
-					mapInCreation.link = ghost;
+					Map.link = ghost;
 					MMWalkingSolidEntities ghost1 = new MMWalkingSolidEntities(xPos, yPos, Images.forestTiles.get(0), handler);
 					mapInCreation.addBlock(ghost1);
 				}else if(currentPixel == moveU) {
@@ -693,8 +690,8 @@ public class MapBuilder {
 
 			}
 		}
-		if (mapInCreation.link != null) {
-			mapInCreation.link.map = mapInCreation;
+		if (Map.link != null) {
+			Map.link.map = mapInCreation;
 		}
 		return mapInCreation;
 	}

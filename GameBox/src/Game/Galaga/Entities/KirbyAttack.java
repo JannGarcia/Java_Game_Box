@@ -4,7 +4,6 @@ import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
 
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 /**

@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 
 import Game.GameStates.Zelda.ZeldaGameState;
 import Game.Zelda.Entities.BaseEntity;
-import Game.Zelda.Entities.Statics.DungeonDoor;
 import Game.Zelda.Entities.Statics.Item;
 import Game.Zelda.Entities.Statics.SectionDoor;
 import Game.Zelda.Entities.Statics.SolidStaticEntities;

@@ -652,7 +652,7 @@ public class ZeldaGameState extends State {
 	}
 
 	public GalagaBug createGalagaBug() {
-		BufferedImage[][] sprites = {Images.galagaEnemyBee};
+		BufferedImage[][] sprites = {Images.galagaEnemyBee, Images.galagaNewEnemy, Images.galagaEnemyBomber, Images.galagaEnemyButterfly};
 		BufferedImage[] anim = sprites[new Random().nextInt(sprites.length)];
 		anim = Arrays.copyOfRange(anim, 0, 2);
 		GalagaBug b = new GalagaBug(0,0,0,0,anim,handler);
@@ -905,7 +905,7 @@ public class ZeldaGameState extends State {
 		monster.add(new Creeper(xOffset+(stageWidth/3) - 70,yOffset + (stageHeight/2) - 100,Images.CreeperDown,handler));
 		//monster.add(new Darknut(xOffset + (stageWidth /2), yOffset + (stageHeight/2)- 90, Images.DarknutRight, handler));
 		solids.add(new SectionDoor(0,2,16*worldScale,16*worldScale*7,Direction.LEFT,handler));
-		solids.add(new DungeonDoor(8,4,16*worldScale,16*worldScale,Direction.UP,"dungeon1Enter",handler,itemXToOverworldX(Dungeon1.roomWidth/2),itemYToOverworldY(Dungeon1.roomHeight)));
+		solids.add(new DungeonDoor(8,4,16*worldScale,16*worldScale,Direction.UP,"dungeon1Enter",handler,itemXToOverworldX(Dungeon.roomWidth/2),itemYToOverworldY(Dungeon.roomHeight)));
 		objects.get(4).set(7,solids);
 		enemies.get(4).set(7, monster);
 
@@ -1084,9 +1084,6 @@ public class ZeldaGameState extends State {
 				if (b1.equals(b2)) {
 
 					if (!(b2 instanceof Projectile) && !(handler.getState().equals(handler.getBossState()) && (handler.getBossState().inHeManRoom))) {
-
-						int x = b2.bounds.x - b2.bounds.width/2; int y = b2.bounds.y + b2.bounds.height/2;
-						x = 7; y = 7;
 
 						if (b2 instanceof Enemy) {
 							((Enemy)b2).dropItem();

@@ -2,6 +2,7 @@ package Resources;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Transparency;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -482,6 +483,11 @@ public class Images {
             galagaNewEnemy[5] = galagaSpriteSheet.crop(65,152,13,14);
             galagaNewEnemy[6] = galagaSpriteSheet.crop(42,154,12,11);
             galagaNewEnemy[7] = galagaSpriteSheet.crop(19,153,10,13);
+            
+            galagaEnemyButterfly[0] = galagaSpriteSheet.crop(188,154,9,10);
+            galagaEnemyButterfly[1] = galagaSpriteSheet.crop(162,154,13,10);
+            galagaEnemyBomber[0] = galagaSpriteSheet.crop(161,103,15,16);
+            galagaEnemyBomber[1] = galagaSpriteSheet.crop(185,104,15,15);
 
 
 			galagaPlayerLaser = galagaSpriteSheet.crop(365 ,219,3,8);
@@ -1437,7 +1443,7 @@ public class Images {
 			graveTiles.add(grave.crop(136,51,16,16));
 
 
-		}catch (Exception e) {
+		}catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -1548,20 +1554,19 @@ public class Images {
 	}
 
 
-	public static BufferedImage loadImage(String path) {
+	public static BufferedImage loadImage(String path) throws IOException {
 		try {
 			return ImageIO.read(Images.class.getResourceAsStream(path));
 		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
+			throw e;
 		}
-		return null;
+
 	}
 
 	public static BufferedImage tint(BufferedImage src, float r, float g, float b) {
 
 		// Copy image
-		BufferedImage newImage = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TRANSLUCENT);
+		BufferedImage newImage = new BufferedImage(src.getWidth(), src.getHeight(), Transparency.TRANSLUCENT);
 		Graphics2D graphics = newImage.createGraphics();
 		graphics.drawImage(src, 0, 0, null);
 		graphics.dispose();

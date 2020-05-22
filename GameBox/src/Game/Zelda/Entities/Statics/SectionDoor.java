@@ -2,11 +2,9 @@ package Game.Zelda.Entities.Statics;
 
 import Game.GameStates.Zelda.ZeldaGameState;
 import Game.Zelda.Entities.Dynamic.Direction;
-import Game.Zelda.World.MapBuilder;
 import Main.Handler;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by AlexVR on 3/15/2020
@@ -32,7 +30,8 @@ public class SectionDoor extends SolidStaticEntities {
 
         g.setColor(Color.YELLOW);
         
-        if (handler.getZeldaGameState().showHitboxes) {
+        handler.getZeldaGameState();
+		if (ZeldaGameState.showHitboxes) {
         	g.fillRect((x * (ZeldaGameState.stageWidth/16)) + ZeldaGameState.xOffset,(y * (ZeldaGameState.stageHeight/11)) + ZeldaGameState.yOffset,width,height);
         }
     }

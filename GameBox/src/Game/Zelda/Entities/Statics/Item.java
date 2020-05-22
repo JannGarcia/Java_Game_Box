@@ -2,8 +2,6 @@ package Game.Zelda.Entities.Statics;
 
 import java.awt.image.BufferedImage;
 
-import Game.GameStates.Zelda.ZeldaGameState;
-import Game.Zelda.Entities.Dynamic.Direction;
 import Main.Handler;
 
 public class Item extends SolidStaticEntities {

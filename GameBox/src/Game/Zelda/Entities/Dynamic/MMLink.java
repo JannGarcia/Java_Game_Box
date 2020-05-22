@@ -1,11 +1,8 @@
 package Game.Zelda.Entities.Dynamic;
 
-import Game.GameStates.Zelda.ZeldaMMGameState;
 import Game.GameStates.Zelda.ZeldaMapMakerState;
-import Game.Zelda.Entities.BaseEntity;
 import Game.Zelda.Entities.MMBaseEntity;
 import Game.Zelda.Entities.Statics.MMSolidStaticEntities;
-import Game.Zelda.Entities.Statics.SolidStaticEntities;
 import Game.Zelda.World.Map;
 import Main.Handler;
 import Resources.Animation;

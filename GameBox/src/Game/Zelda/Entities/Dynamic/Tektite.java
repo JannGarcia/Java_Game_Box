@@ -3,8 +3,6 @@ package Game.Zelda.Entities.Dynamic;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.Random;
-import Game.GameStates.Zelda.ZeldaGameState;
 import Main.Handler;
 import Resources.Animation;
 import Resources.Images;

@@ -157,7 +157,7 @@ public class MapBuilder {
 			
 			// Check every block and find one that does not have a destination
 			for (int i = 0; i < inCreation.getTransportBlocks().size(); i++ ) {
-				TransportBlock block1 = (TransportBlock) inCreation.getTransportBlocks().get(i);
+				TransportBlock block1 = inCreation.getTransportBlocks().get(i);
 				
 				// If the block is the one we are checking, don't connect to itself
 				if (block1.equals(block)) {continue;}

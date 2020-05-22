@@ -5,9 +5,9 @@ import Resources.Animation;
 import Resources.Images;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.util.List;
+
 
 public class EnemyBee extends BaseEntity {
     int row,col;//row 3-4, col 0-7
@@ -23,7 +23,7 @@ public class EnemyBee extends BaseEntity {
         super(x, y, width, height, Images.galagaEnemyBee[0], handler);
         this.row = row;
         this.col = col;
-        ((List) handler.getGalagaState().getGalagaGrid().get(row)).set(col, true);
+        handler.getGalagaState().getGalagaGrid().get(row).set(col, true);
         BufferedImage[] idleAnimList= new BufferedImage[2];
         idleAnimList[0] = Images.galagaEnemyBee[0];
         idleAnimList[1] = Images.galagaEnemyBee[1];
@@ -58,11 +58,7 @@ public class EnemyBee extends BaseEntity {
                 x = (handler.getWidth()/2)+ width + (handler.getWidth()/4);
                 y = random.nextInt(handler.getHeight()-handler.getHeight()/8);
                 break;
-                
-//            case 3://down
-//                x = random.nextInt((handler.getWidth()/2))+handler.getWidth()/4;
-//                y = handler.getHeight()+height;
-//                break;
+
         }
         bounds.x=x;
         bounds.y=y;
@@ -77,7 +73,7 @@ public class EnemyBee extends BaseEntity {
         if (hit){
             if (enemyDeath.end){
                 remove = true;
-                ((List) handler.getGalagaState().getGalagaGrid().get(row)).set(col, false);
+                handler.getGalagaState().getGalagaGrid().get(row).set(col, false);
                 if (playerDamage == true) {	// If the enemy was killed by the player
                 	handler.getScoreManager().addGalagaCurrentScore(100);                	
                 }                
@@ -89,12 +85,12 @@ public class EnemyBee extends BaseEntity {
         
         if (justSpawned){
             timeAlive++;
-            if (!centered && Point.distance(x,y,handler.getWidth()/2,handler.getHeight()/2)>speed){//reach center of screen
+            if (!centered && Point2D.distance(x,y,handler.getWidth()/2,handler.getHeight()/2)>speed){//reach center of screen
                 switch (spawnPos){
                     case 0://left
                         x+=speed;
-                        if (Point.distance(x,y,x,handler.getHeight()/2)>speed) {
-                            if (y > handler.getHeight() / 2) {
+                        if (Point2D.distance(x,y,x,handler.getHeight()/2)>speed) {
+                            if (y - 10 > handler.getHeight() / 2) {
                                 y -= speed;
                             } else {
                                 y += speed;
@@ -103,8 +99,8 @@ public class EnemyBee extends BaseEntity {
                         break;
                     case 1://top
                         y+=speed;
-                        if (Point.distance(x,y,handler.getWidth()/2,y)>speed) {
-                            if (x > handler.getWidth() / 2) {
+                        if (Point2D.distance(x,y,handler.getWidth()/2,y)>speed) {
+                            if (x - 10> handler.getWidth() / 2) {
                                 x -= speed;
                             } else {
                                 x += speed;
@@ -113,25 +109,15 @@ public class EnemyBee extends BaseEntity {
                         break;
                     case 2://right
                         x-=speed;
-                        if (Point.distance(x,y,x,handler.getHeight()/2)>speed) {
-                            if (y > handler.getHeight() / 2) {
+                        if (Point2D.distance(x,y,x,handler.getHeight()/2)>speed) {
+                            if (y - 10> handler.getHeight() / 2) {
                                 y -= speed;
                             } else {
                                 y += speed;
                             }
                         }
                         break;
-                        
-//                    case 3://down
-//                        y-=speed;
-//                        if (Point.distance(x,y,handler.getWidth()/2,y)>speed) {
-//                            if (x > handler.getWidth() / 2) {
-//                                x -= speed;
-//                            } else {
-//                                x += speed;
-//                            }
-//                        }
-//                        break;
+
                 }
                 if (timeAlive==60*10){   // if (timealive>=60*60*2  <== Original
 
@@ -148,7 +134,7 @@ public class EnemyBee extends BaseEntity {
                 }
                 if (centerCoolDown<=0){
 
-                    if (Point.distance(x, y, formationX, formationY) > speed) {//reach center of screen
+                    if (Point2D.distance(x, y, formationX, formationY) > speed) {//reach center of screen
 
                     	
                         if (Math.abs(y-formationY)>=6) {
@@ -160,7 +146,7 @@ public class EnemyBee extends BaseEntity {
                         	y = formationY;
                         }
                         
-                        if (Point.distance(x,y,formationX,y) > speed/2) {
+                        if (Point2D.distance(x,y,formationX,y) > speed/2) {
                             if (x >formationX) {
                                 x -= speed;
                             } else {
@@ -279,7 +265,7 @@ public class EnemyBee extends BaseEntity {
         }
         
         // Move left/right depending on ship's position
-        else if (Point.distance(x,y,shipX,y)>speed/2) {
+        else if (Point2D.distance(x,y,shipX,y)>speed/2) {
             if (x > shipX) {
                 x -= speed;  // Left
             } 

@@ -1,8 +1,6 @@
 package Game.PacMan.entities.Dynamics;
 
-import Game.PacMan.World.Map;
 import Game.PacMan.World.MapBuilder;
-import Game.PacMan.entities.BaseEntity;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BoundBlock;
 import Game.PacMan.entities.Statics.SpawnerGate;
@@ -13,7 +11,6 @@ import Resources.Images;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
@@ -164,7 +161,7 @@ public class Ghost extends BaseDynamic{
     	// if edible
     	else {
     	    if (speedIsNormal) {
-                speed = (double) speed / 2;
+                speed = speed / 2;
                 if (speed <= 1) {speed = 1;}
                 speedIsNormal = false;
             }
@@ -197,7 +194,6 @@ public class Ghost extends BaseDynamic{
         ArrayList<BaseDynamic> enemies = handler.getMap().getEnemiesOnMap();
         ArrayList<TransportBlock> transBlocks = handler.getMap().getTransportBlocks();
         velY = this.speed;
-        boolean ghostDies = false;
         boolean toUp = moving && facing.equals("Up");
 
         Rectangle ghostBounds = this.getBounds();
@@ -260,7 +256,6 @@ public class Ghost extends BaseDynamic{
         ArrayList<BaseDynamic> enemies = handler.getMap().getEnemiesOnMap();
         ArrayList<TransportBlock> transBlocks = handler.getMap().getTransportBlocks();
         velX = this.speed;
-        boolean ghostDies = false;
         boolean toRight = moving && facing.equals("Right");
 
         Rectangle ghostBounds = this.getBounds();
@@ -393,9 +388,6 @@ public class Ghost extends BaseDynamic{
 		}
 		
 		this.xOnMap = closestX; this.yOnMap = closestY;
-		
-		int xPos = (xOnMap*pixelMultiplier)+((handler.getWidth()-(map.getWidth()*pixelMultiplier)))/2;
-		int yPos = (yOnMap*pixelMultiplier)+((handler.getHeight()-(map.getHeight()*pixelMultiplier)))/2;
 		
 		this.up = yOnMap-1 > 0 && map.getRGB(xOnMap, yOnMap-1) != boundBlock && map.getRGB(xOnMap, yOnMap-1) != gate;                         
 		this.down = yOnMap+1 < map.getHeight() && map.getRGB(xOnMap, yOnMap+1) != boundBlock && map.getRGB(xOnMap, yOnMap+1) != gate;

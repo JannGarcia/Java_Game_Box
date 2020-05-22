@@ -1,9 +1,6 @@
 package Game.Zelda.Entities.Dynamic;
 
-import static Game.GameStates.Zelda.ZeldaGameState.worldScale;
-
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -104,8 +101,6 @@ public class Projectile extends BaseMovingEntity {
 
 	@Override
 	public void render(Graphics g) {
-		
-		Graphics2D g2 = (Graphics2D) g;
 		BufferedImage frame = this.animation.getCurrentFrame();
 		
 		switch(this.direction) {

@@ -3,11 +3,10 @@ package Game.Galaga.Entities;
 import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
-
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.util.List;
+
 
 public class HeMan extends BaseEntity {
     boolean justSpawned=true,attacking=false, positioned=false,hit=false,centered = false;
@@ -31,7 +30,7 @@ public class HeMan extends BaseEntity {
         idleAnimList[1] = Images.heman[1];
         idle = new Animation(512,idleAnimList);
         
-        ((List) handler.getGalagaState().getGalagaGrid().get(1)).set(col, true);
+        handler.getGalagaState().getGalagaGrid().get(1).set(col, true);
 
         // Add He-Man's attack
         BufferedImage[] attackAnimList = new BufferedImage[8];
@@ -91,7 +90,7 @@ public class HeMan extends BaseEntity {
 
         		if (enemyDeath.end){
                     remove = true;
-                    ((List) handler.getGalagaState().getGalagaGrid().get(1)).set(col, false);
+                    handler.getGalagaState().getGalagaGrid().get(1).set(col, false);
 
                     if (playerDamage == true) {	// If the enemy was killed by the player
                     	handler.getScoreManager().addGalagaCurrentScore(1000);                	
@@ -108,7 +107,7 @@ public class HeMan extends BaseEntity {
         
         if (justSpawned){
             timeAlive++;
-            if (!centered && Point.distance(x ,y, formationX ,handler.getHeight()/2) - yDisplacement >speed){//reach center of screen
+            if (!centered && Point2D.distance(x ,y, formationX ,handler.getHeight()/2) - yDisplacement >speed){//reach center of screen
             	
             	y+=speed;
             	
@@ -127,7 +126,7 @@ public class HeMan extends BaseEntity {
                 }
                 if (centerCoolDown<=0){  	
 
-                    if (Point.distance(x , y, x, formationY * .10 - yDisplacement) > speed) {//reach center of screen
+                    if (Point2D.distance(x , y, x, formationY * .10 - yDisplacement) > speed) {//reach center of screen
 
                     	
                         if (Math.abs(y-formationY - yDisplacement)>=6) {

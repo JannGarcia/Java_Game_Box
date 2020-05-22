@@ -1,8 +1,6 @@
 package Game.Zelda.Entities.Dynamic;
 
 import java.awt.image.BufferedImage;
-import java.util.Random;
-
 import Main.Handler;
 
 public class Snake extends Enemy {

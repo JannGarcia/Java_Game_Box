@@ -5,9 +5,9 @@ import Resources.Animation;
 import Resources.Images;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.util.List;
+
 
 public class NewEnemy extends BaseEntity {
     int row,col;//row 3-4, col 0-7
@@ -21,7 +21,7 @@ public class NewEnemy extends BaseEntity {
         super(x, y, width, height, Images.galagaNewEnemy[0], handler);
         this.row = row;
         this.col = col;
-        ((List) handler.getGalagaState().getGalagaGrid().get(row)).set(col, true);
+        handler.getGalagaState().getGalagaGrid().get(row).set(col, true);
         BufferedImage[] idleAnimList= new BufferedImage[2];
         idleAnimList[0] = Images.galagaNewEnemy[0];
         idleAnimList[1] = Images.galagaNewEnemy[1];
@@ -71,7 +71,7 @@ public class NewEnemy extends BaseEntity {
         if (hit){
             if (enemyDeath.end){
                 remove = true;
-                ((List) handler.getGalagaState().getGalagaGrid().get(row)).set(col, false);
+                handler.getGalagaState().getGalagaGrid().get(row).set(col, false);
                 if (playerDamage == true) {  // If the enemy was killed by the player
                 	handler.getScoreManager().addGalagaCurrentScore(100);
                 }
@@ -83,12 +83,12 @@ public class NewEnemy extends BaseEntity {
         
         if (justSpawned){
             timeAlive++;
-            if (!centered && Point.distance(x,y,handler.getWidth()/2,handler.getHeight()/2)>speed){//reach center of screen
+            if (!centered && Point2D.distance(x,y,handler.getWidth()/2,handler.getHeight()/2)>speed){//reach center of screen
                 switch (spawnPos){
                     case 0://left
                         x+=speed;
-                        if (Point.distance(x,y,x,handler.getHeight()/2)>speed) {
-                            if (y > handler.getHeight() / 2) {
+                        if (Point2D.distance(x,y,x,handler.getHeight()/2)>speed) {
+                            if (y -10> handler.getHeight() / 2) {
                                 y -= speed;
                             } else {
                                 y += speed;
@@ -97,8 +97,8 @@ public class NewEnemy extends BaseEntity {
                         break;
                     case 1://top
                         y+=speed;
-                        if (Point.distance(x,y,handler.getWidth()/2,y)>speed) {
-                            if (x > handler.getWidth() / 2) {
+                        if (Point2D.distance(x,y,handler.getWidth()/2,y)>speed) {
+                            if (x -10> handler.getWidth() / 2) {
                                 x -= speed;
                             } else {
                                 x += speed;
@@ -107,8 +107,8 @@ public class NewEnemy extends BaseEntity {
                         break;
                     case 2://right
                         x-=speed;
-                        if (Point.distance(x,y,x,handler.getHeight()/2)>speed) {
-                            if (y > handler.getHeight() / 2) {
+                        if (Point2D.distance(x,y,x,handler.getHeight()/2)>speed) {
+                            if (y -10> handler.getHeight() / 2) {
                                 y -= speed;
                             } else {
                                 y += speed;
@@ -143,7 +143,7 @@ public class NewEnemy extends BaseEntity {
                 }
                 if (centerCoolDown<=0){
 
-                    if (Point.distance(x, y, formationX, formationY) > speed) {//reach center of screen
+                    if (Point2D.distance(x, y, formationX, formationY) > speed) {//reach center of screen
 
                     	
                         if (Math.abs(y-formationY)>=6) {
@@ -155,7 +155,7 @@ public class NewEnemy extends BaseEntity {
                         	y = formationY;
                         }
                         
-                        if (Point.distance(x,y,formationX,y) > speed/2) {
+                        if (Point2D.distance(x,y,formationX,y) > speed/2) {
                             if (x >formationX) {
                                 x -= speed;
                             } else {

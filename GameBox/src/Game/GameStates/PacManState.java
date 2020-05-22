@@ -243,8 +243,6 @@ public class PacManState extends State {
 
         switch (Mode) {
             case "Stage":
-                String pacManStatus;
-
                 Graphics2D g2 = (Graphics2D) g.create();
                 handler.getMap().drawMap(g2);
                 g.setColor(Color.WHITE);

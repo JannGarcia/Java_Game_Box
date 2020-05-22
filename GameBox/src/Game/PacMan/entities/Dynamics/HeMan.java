@@ -13,7 +13,6 @@ import Resources.Images;
 public class HeMan extends BaseDynamic {
 	
 	private BufferedImage[] heMan1 = {Images.heman[0], Images.heman[1]}, heMan2 = Images.heman;
-	private BufferedImage map;
 	public Animation idleAnim = new Animation(512, heMan1);
 	public Animation attackAnim = new Animation(512, heMan2);
 	

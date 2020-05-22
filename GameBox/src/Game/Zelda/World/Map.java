@@ -1,8 +1,5 @@
 package Game.Zelda.World;
 
-import Game.GameStates.Zelda.ZeldaMMGameState;
-import Game.Zelda.Entities.BaseEntity;
-import Game.Zelda.Entities.Dynamic.BaseMovingEntity;
 import Game.Zelda.Entities.Dynamic.MMBaseMovingEntity;
 import Game.Zelda.Entities.Dynamic.MMLink;
 import Game.Zelda.Entities.MMBaseEntity;
@@ -21,7 +18,7 @@ public class Map {
 
     public Map(Handler handler) {
         this.handler=handler;
-        this.blocksOnMap = new ArrayList<>();
+        Map.blocksOnMap = new ArrayList<>();
         this.enemiesOnMap = new ArrayList<>();
     }
 

@@ -2,10 +2,7 @@ package Game.Zelda.Entities.Statics;
 
 import Game.GameStates.Zelda.ZeldaGameState;
 import Game.Zelda.Entities.BaseEntity;
-import Game.Zelda.World.MapBuilder;
 import Main.Handler;
-import Resources.Images;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

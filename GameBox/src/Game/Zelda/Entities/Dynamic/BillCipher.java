@@ -25,7 +25,7 @@ public class BillCipher extends Enemy {
 
 	// Starting phase variables
 	private int teleCooldown = 60;
-	private boolean drawSymbol, start, disguised = true;
+	private boolean /*drawSymbol,*/ start, disguised = true;
 
 	// Battle Variables
 	protected int phase = -1, teleportations = 0, maxHealth, hoverTick = 0;
@@ -101,7 +101,7 @@ public class BillCipher extends Enemy {
 						((Dungeon) handler.getState()).getCurrentRoom().setDoors(true, true, true, true);
 					}
 
-					drawSymbol = true;
+					//drawSymbol = true;
 					handler.getMusicHandler().changeMusic("weirdmaggaedon.wav");
 					this.changePhase(0);
 				}
@@ -822,6 +822,7 @@ public class BillCipher extends Enemy {
 		}
 	}
 	
+	@Override
 	protected Item getRandomItem(int x, int y) {
 		return new Item(ZeldaGameState.OverworldXToItemX(handler.getZeldaGameState().link.x), ZeldaGameState.OverworldYToItemY(handler.getZeldaGameState().link.y), "heManKey", Images.linkKey2, handler);
 	}

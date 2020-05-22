@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import Game.GameStates.State;
-import Game.Zelda.Entities.Dynamic.Link;
 import Main.Handler;
 import Resources.Images;
 

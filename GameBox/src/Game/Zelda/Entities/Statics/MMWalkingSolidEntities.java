@@ -1,6 +1,5 @@
 package Game.Zelda.Entities.Statics;
 
-import Game.Zelda.Entities.BaseEntity;
 import Game.Zelda.Entities.MMBaseEntity;
 import Main.Handler;
 

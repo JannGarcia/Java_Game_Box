@@ -35,8 +35,8 @@ public class CreditsState extends State {
 			if (finishedCD > 0) {finishedCD--;}
 			
 			else if (finishedCD <= 0) {
-				handler.getMusicHandler().changeMusic("nature.wav");
 				handler.getZeldaGameState().refresh();
+				handler.getMusicHandler().changeMusic("nature.wav");
 				ZeldaGameState.timesDied = 0;
 				ZeldaGameState.potionsUsed = 0;
 				ZeldaGameState.rupeesSpent = 0;

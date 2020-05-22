@@ -1,9 +1,6 @@
 package Game.Zelda.Entities.Statics;
 
-import Game.GameStates.Zelda.ZeldaGameState;
-import Game.Zelda.Entities.BaseEntity;
 import Game.Zelda.Entities.MMBaseEntity;
-import Game.Zelda.World.MapBuilder;
 import Main.Handler;
 
 import java.awt.*;

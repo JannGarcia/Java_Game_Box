@@ -1,13 +1,12 @@
 package Game.Zelda.Entities;
 
 import Game.GameStates.Zelda.ZeldaMapMakerState;
-import Game.Zelda.World.MapBuilder;
+
 import Main.Handler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static Game.GameStates.Zelda.ZeldaGameState.worldScale;
 
 /**
  * Created by AlexVR on 3/14/2020

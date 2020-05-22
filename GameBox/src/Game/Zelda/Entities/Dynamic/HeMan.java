@@ -383,6 +383,7 @@ public class HeMan extends Enemy {
 		return this.dashing;
 	}
 	
+	@Override
 	public boolean isInvulnerable() {
 		return super.isInvulnerable() || this.invulnerable;
 	}
@@ -417,6 +418,7 @@ public class HeMan extends Enemy {
 		this.canHurtLink = canHurtLink;
 	}
 
+	@Override
 	public void move (Direction direction) {
 		switch (direction) {
         case RIGHT:

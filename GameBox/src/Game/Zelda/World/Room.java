@@ -1,9 +1,7 @@
 package Game.Zelda.World;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import Game.GameStates.Zelda.BossBattleState;
 import Game.GameStates.Zelda.ZeldaGameState;
 import Game.Zelda.Entities.Dynamic.BaseMovingEntity;
 import Game.Zelda.Entities.Dynamic.Direction;
@@ -11,7 +9,6 @@ import Game.Zelda.Entities.Statics.DungeonDoor;
 import Game.Zelda.Entities.Statics.Item;
 import Game.Zelda.Entities.Statics.SolidStaticEntities;
 import Main.Handler;
-import Resources.Images;
 
 public class Room {
 
@@ -56,7 +53,7 @@ public class Room {
 
 			boolean up = false, down = false;
 
-			if ((xBlock == (int) (roomWidth / 2) - 1 || xBlock == (int) (roomWidth / 2))) {
+			if ((xBlock == roomWidth / 2 - 1 || xBlock == roomWidth / 2)) {
 				DungeonDoor door = new DungeonDoor(x, topY, 16 * ZeldaGameState.worldScale * 2,
 						16 * ZeldaGameState.worldScale * 2, Direction.UP, "movingUp", handler,
 						ZeldaGameState.itemXToOverworldX(x), ZeldaGameState.itemYToOverworldY(bottomY - 2));
@@ -68,7 +65,7 @@ public class Room {
 				up = true;
 			}
 
-			if ((xBlock == (int) (roomWidth / 2) - 1 || xBlock == (int) (roomWidth / 2))) {
+			if ((xBlock == roomWidth / 2 - 1 || xBlock == roomWidth / 2)) {
 				DungeonDoor door = new DungeonDoor(x, bottomY, 16 * ZeldaGameState.worldScale * 2,
 						16 * ZeldaGameState.worldScale * 2, Direction.DOWN, "movingDown", handler,
 						ZeldaGameState.itemXToOverworldX(x), ZeldaGameState.itemYToOverworldY(topY + 2));
@@ -107,7 +104,7 @@ public class Room {
 				continue;
 			}
 
-			if ((yBlock == (int) (roomHeight / 2) - 1 || yBlock == (int) (roomHeight / 2))) {
+			if ((yBlock == roomHeight / 2 - 1 || yBlock == roomHeight / 2)) {
 				DungeonDoor door = new DungeonDoor(leftX, y, 16 * ZeldaGameState.worldScale * 2,
 						16 * ZeldaGameState.worldScale * 2, Direction.LEFT, "movingLeft", handler,
 						ZeldaGameState.itemXToOverworldX(rightX - 2), ZeldaGameState.itemYToOverworldY(y));
@@ -120,7 +117,7 @@ public class Room {
 
 			}
 
-			if ((yBlock == (int) (roomHeight / 2) - 1 || yBlock == (int) (roomHeight / 2))) {
+			if ((yBlock == roomHeight / 2 - 1 || yBlock == roomHeight / 2)) {
 				DungeonDoor door = new DungeonDoor(rightX, y, 16 * ZeldaGameState.worldScale * 2,
 						16 * ZeldaGameState.worldScale * 2, Direction.RIGHT, "movingRight", handler,
 						ZeldaGameState.itemXToOverworldX(leftX + 2), ZeldaGameState.itemYToOverworldY(y));

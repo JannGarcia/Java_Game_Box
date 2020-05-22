@@ -2,6 +2,7 @@ package Game.Zelda.Entities.Statics;
 
 import Game.GameStates.Zelda.ZeldaMMGameState;
 import Game.Zelda.Entities.MMBaseEntity;
+import Game.Zelda.World.Map;
 import Main.Handler;
 
 import java.awt.*;
@@ -23,9 +24,9 @@ public class MMTeleport extends MMBaseEntity {
 
     @Override
     public void tick() {
-        if (handler.getState() instanceof ZeldaMMGameState && ((ZeldaMMGameState)handler.getState()).map.link.interactBounds.intersects(bounds) && handler.getKeyManager().keyJustPressed(KeyEvent.VK_SHIFT)){
-            ((ZeldaMMGameState)handler.getState()).map.link.x = linkedX;
-            ((ZeldaMMGameState)handler.getState()).map.link.y = linkedY;
+        if (handler.getState() instanceof ZeldaMMGameState && Map.link.interactBounds.intersects(bounds) && handler.getKeyManager().keyJustPressed(KeyEvent.VK_SHIFT)){
+            Map.link.x = linkedX;
+            Map.link.y = linkedY;
             return;
         }
     }

@@ -144,7 +144,8 @@ public class GameSetUp implements Runnable {
         thread.start();
     }
 
-    public void run(){
+    @Override
+	public void run(){
 
         //initiallizes everything in order to run without breaking
         init();

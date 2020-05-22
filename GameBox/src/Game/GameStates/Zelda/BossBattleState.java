@@ -1,7 +1,7 @@
 package Game.GameStates.Zelda;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -12,11 +12,10 @@ import Game.Zelda.Entities.Dynamic.BaseMovingEntity;
 import Game.Zelda.Entities.Dynamic.Direction;
 import Game.Zelda.Entities.Dynamic.Ghost;
 import Game.Zelda.Entities.Dynamic.HeMan;
-import Game.Zelda.Entities.Dynamic.Link;
+
 import Game.Zelda.Entities.Statics.DungeonDoor;
 import Game.Zelda.Entities.Statics.Item;
 import Game.Zelda.Entities.Statics.SolidStaticEntities;
-import Game.Zelda.World.Room;
 import Main.Handler;
 import Resources.Images;
 
@@ -30,7 +29,6 @@ public class BossBattleState extends State {
 	private int droningCooldown = 20;
 	
 	private HeMan boss;
-	private Link link;
 	private ArrayList<BaseMovingEntity> enemies;
 	private ArrayList<SolidStaticEntities> blocks;
 	private ZeldaGameState zeldaState;
@@ -114,7 +112,7 @@ public class BossBattleState extends State {
 						boss.playAnimation = true; handler.getMusicHandler().playEffect("hemanattack.wav");}
 				 	
 						// Midway
-						if(phase3Wait == (int) (pause3Duration/2) * 60) {if (bossTheme != 1) handler.getMusicHandler().changeMusic(FINAL_MUSIC);}
+						if(phase3Wait == pause3Duration/2 * 60) {if (bossTheme != 1) handler.getMusicHandler().changeMusic(FINAL_MUSIC);}
 						if(phase3Wait > 0) {phase3Wait--; return;}
 						else {
 							
@@ -214,7 +212,6 @@ public class BossBattleState extends State {
 
 	@Override
 	public void render(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
 		if (transitionToSpace) {
 			g.drawImage(Images.space, 0, 0, handler.getWidth(), handler.getHeight(), null);
 		}
@@ -379,7 +376,6 @@ public class BossBattleState extends State {
 		this.roomX = 0;
 		this.roomY = 0;
 		loadRoom();
-		link = zeldaState.link;
 		keyUsed = false;
 	}
 	
@@ -422,7 +418,7 @@ public class BossBattleState extends State {
 			
 				// Top Wall / Bottom Wall
 				for (int x = leftX ; x < rightX; x+=2) {
-					if (!(roomWidth%2==0 && x == (int) (roomWidth/2)) && !(roomWidth%2==1 && (x == (int) (roomWidth/2) -1  || x == (int) (roomWidth/2)))) {
+					if (!(roomWidth%2==0 && x == roomWidth/2) && !(roomWidth%2==1 && (x == roomWidth/2 -1  || x == roomWidth/2))) {
 						blocks.add(new SolidStaticEntities(x,topY,Images.zeldaTiles.get(0), handler));
 						blocks.add(new SolidStaticEntities(x,bottomY,Images.zeldaTiles.get(0), handler));
 					}
@@ -693,7 +689,7 @@ public class BossBattleState extends State {
 		for (int x = leftX, xBlock = 0 ; x <= rightX && xBlock <= roomWidth; x+=2, xBlock+=2) {
 			boolean bottomDoor = false; boolean topDoor = false;
 			if (up) {
-				if ((xBlock == (int) (roomWidth/2) -1  || xBlock == (int) (roomWidth/2))) {
+				if ((xBlock == roomWidth/2 -1  || xBlock == roomWidth/2)) {
 					DungeonDoor door = new DungeonDoor(x,topY,16*ZeldaGameState.worldScale*2,16*ZeldaGameState.worldScale * 2, Direction.UP,"movingUp" , handler, ZeldaGameState.itemXToOverworldX(x), ZeldaGameState.itemYToOverworldY(bottomY-2));
 					door.sprite = this.topDoor;
 					blocks.add(door);
@@ -702,7 +698,7 @@ public class BossBattleState extends State {
 			}
 			
 			if (down) {
-				if ((xBlock == (int) (roomWidth/2) -1  || xBlock == (int) (roomWidth/2))) {
+				if ((xBlock == roomWidth/2 -1  || xBlock == roomWidth/2)) {
 					DungeonDoor door = new DungeonDoor(x,bottomY,16*ZeldaGameState.worldScale*2,16*ZeldaGameState.worldScale * 2, Direction.DOWN,"movingDown" , handler, ZeldaGameState.itemXToOverworldX(x), ZeldaGameState.itemYToOverworldY(topY+2));
 					door.sprite = this.bottomDoor;
 					blocks.add(door);
@@ -732,7 +728,7 @@ public class BossBattleState extends State {
 			boolean rightDoor = false; boolean leftDoor = false;
 						
 			if (left) {
-				if ((yBlock == (int) (roomHeight/2) -1  || yBlock == (int) (roomHeight/2))) {
+				if ((yBlock == roomHeight/2 -1  || yBlock == roomHeight/2)) {
 					DungeonDoor door = new DungeonDoor(leftX,y,16*ZeldaGameState.worldScale*2,16*ZeldaGameState.worldScale * 2, Direction.LEFT,"movingLeft" , handler, ZeldaGameState.itemXToOverworldX(rightX-2), ZeldaGameState.itemYToOverworldY(y));
 					door.sprite = this.leftDoor;
 					blocks.add(door);					
@@ -741,7 +737,7 @@ public class BossBattleState extends State {
 			}
 			
 			if (right) {
-				if ((yBlock == (int) (roomHeight/2) -1  || yBlock == (int) (roomHeight/2))) {
+				if ((yBlock == roomHeight/2 -1  || yBlock == roomHeight/2)) {
 					DungeonDoor door = new DungeonDoor(rightX,y,16*ZeldaGameState.worldScale*2,16*ZeldaGameState.worldScale * 2, Direction.RIGHT,"movingRight" , handler, ZeldaGameState.itemXToOverworldX(leftX+2), ZeldaGameState.itemYToOverworldY(y));
 					door.sprite = this.rightDoor;
 					blocks.add(door);
