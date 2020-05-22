@@ -10,7 +10,7 @@ import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
 
-public class Enemy extends BaseEntity {
+public abstract class Enemy extends BaseEntity {
 
     int row,col;
     boolean justSpawned = true, attacking = false, positioned = false, hit = false, centered = false;
@@ -196,5 +196,7 @@ public class Enemy extends BaseEntity {
         bounds.x=x;
         bounds.y=y;
     }
+    
+    public abstract void attack();
 
 }

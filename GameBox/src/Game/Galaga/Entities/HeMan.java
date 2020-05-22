@@ -209,20 +209,13 @@ public class HeMan extends BaseEntity {
         	// Force every enemy to attack
         	else if (soundCooldown == 0 && attackType == 1) {
         		for (BaseEntity enemy : handler.getGalagaState().entityManager.entities) {
-        			if (enemy instanceof EnemyBee) {
-        				((EnemyBee) enemy).attack();
-        			}
-        			
-        			if (enemy instanceof NewEnemy) {
-        				((NewEnemy) enemy).attack();
-        			}
-        			
+        			if (enemy instanceof Enemy) {((Enemy) enemy).attack();}	
         		}
         		soundCooldown = 6 * 60;
                 waitCooldown = handler.getGalagaState().difficulty.equals("hard") ? (random.nextInt(6 * 60)) + 5 * 60 : (random.nextInt(13 * 60)) + 5 * 60;
                 attacking = false;
         		positioned = true;
-        		 attack.reset();
+        		attack.reset();
         		 
         	}
 

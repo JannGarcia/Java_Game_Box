@@ -112,7 +112,7 @@ public class PlayerShip extends BaseEntity{
         		
         		// Check if the first row is empty
         		for (int i = 0; i < grid.get(1).size(); i++) {
-        			if (grid.get(1).get(i) == false) {
+        			if (grid.get(1).get(i) != null && !grid.get(1).get(i)) {
         				shouldSpawn = true;
         				break;
         			}
@@ -130,7 +130,7 @@ public class PlayerShip extends BaseEntity{
         		// Spawn He-Man
         		while (shouldSpawn) {
         			int col = random.nextInt(8);
-        			if (grid.get(1).get(col).toString() == "false") {
+        			if (grid.get(1).get(col) != null && !grid.get(1).get(col)) {
         				handler.getGalagaState().entityManager.entities.add(new HeMan(10, 10, 60, 80, handler, col));
                     	handler.getMusicHandler().playEffect("heman.wav");	
                     	shouldSpawn = false;
