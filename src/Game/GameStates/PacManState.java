@@ -342,6 +342,11 @@ public class PacManState extends State {
     @Override
     public void refresh() {
         handler.getMap().reset();
+        this.level = 1;
+        if (handler.getScoreManager().getPacmanCurrentScore() > handler.getScoreManager().getPacmanHighScore()) {
+            handler.getScoreManager().setPacmanHighScore(handler.getScoreManager().getPacmanCurrentScore());
+        }
+        handler.getScoreManager().setPacmanCurrentScore(0);
         ghostCount = 0;
         startCooldown = 60 * 4;
         spawnCooldown = 0;
