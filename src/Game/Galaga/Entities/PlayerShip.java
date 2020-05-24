@@ -99,148 +99,155 @@ public class PlayerShip extends BaseEntity{
             }
 
             }
-            
-            // Summon HeMan
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_T) && Handler.DEBUG) {
-
-        		List<List<Boolean>> grid = handler.getGalagaState().getGalagaGrid();
-        		
-        		// He-Man can only spawn in the first row
-        		boolean shouldSpawn = false;
-        		
-        		// Check if the first row is empty
-        		for (int i = 0; i < grid.get(1).size(); i++) {
-        			if (grid.get(1).get(i) != null && !grid.get(1).get(i)) {
-        				shouldSpawn = true;
-        				break;
-        			}
-        		}
-        		
-        		// Check if He-Man already exists
-        		for (BaseEntity enemy : handler.getGalagaState().entityManager.entities) {
-        			if (enemy instanceof HeMan) {
-        				shouldSpawn = false;
-        				break;
-        			}
-        		}
-        		
-        		
-        		// Spawn He-Man
-        		while (shouldSpawn) {
-        			int col = random.nextInt(8);
-        			if (grid.get(1).get(col) != null && !grid.get(1).get(col)) {
-        				handler.getGalagaState().entityManager.entities.add(new HeMan(10, 10, 60, 80, handler, col));
-                    	handler.getMusicHandler().playEffect("heman.wav");	
-                    	shouldSpawn = false;
-        			}
-            	}
-        	
-            }
+   
             
             //Prevents Negative life You need to remember to be positive in the face of adversity
             if (health < 0){health = 0;}
             if (health > 3) {health = 3;}
             
+            if (Handler.DEBUG) {
+            	 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)) {
+                 	if (health < 3) {
+                 		health ++ ; 
+                 	}
+                 }
+                 // Initiates GameOver Sequence
+                 if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_U)) {
+                 	handler.getGalagaState().Mode = "GameOver";
+                 	handler.getMusicHandler().changeMusic("LegendGameOver.wav");
+                 }
+                 
+                 // Kills the player
+                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)) {
+                 	invulnerableCooldown = 0;
+                 	damage(null);
+                 }
+                 
+                 // Gives 100 to the player
+                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_1)) {
+                 	handler.getScoreManager().setGalagaCurrentScore(handler.getScoreManager().getGalagaCurrentScore() + 100); 
+                 }
+                 
+                 // Kill all enemies
+                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_X)) {
+                 	for (BaseEntity enemy : handler.getGalagaState().entityManager.entities) {
+                 		enemy.playerDamage = false;
+                 		enemy.playSound = false;
+                 		enemy.damage(new PlayerLaser(0,0,0,0, Images.galagaPlayerLaser, handler, handler.getGalagaState().entityManager));
+                 	}
+                 }
+                 
+                 
+                 // Spawns a Bee to a random unoccupied spot
+                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)) {
+                 	
+                 	// Get the grid of the bee
+                 	List<List<Boolean>> grid = handler.getGalagaState().getGalagaGrid();
+                 	List<List<Boolean>> beeGrid = grid.subList(3,5);
+                 	boolean shouldSpawn = false;
+                 	
+                 	// Check if the bee should be able to spawn
+                 	for (int i = 0; i < beeGrid.size(); i ++) {
+                 		for (int k = 0; k < beeGrid.get(i).size(); k ++) {
+                 			if (beeGrid.get(i).get(k) != null && !beeGrid.get(i).get(k)) {
+                 				shouldSpawn = true;
+                 				break;
+                 			}
+                 		}
+                 	}
+                 	
+                 	while (shouldSpawn == true) {
+                 		int row = random.nextInt(2) + 3;
+                         int col = random.nextInt(8); 
+                         
+                         if (grid.get(row).get(col) != null && !grid.get(row).get(col)) {
+                         	handler.getGalagaState().entityManager.entities.add(new EnemyBee(10, 10, 30, 30, handler, row, col));
+                         	shouldSpawn = false;
+                         }
+                         
+                 	}
+                 	
+                 }  
+                 
+                 // Summon New Enemy
+                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_O)) {
+                 	
+                 	// Get the grid for the new enemy
+                 	List<List<Boolean>> grid = handler.getGalagaState().getGalagaGrid();
+                 	List<List<Boolean>> shootGrid = grid.subList(1, 3);
+                 	
+                 	boolean shouldSpawn = false;
+                 	
+                 	// Check if the new enemy should be able to spawn
+                 	for (int i = 0; i < shootGrid.size(); i ++) {
+                 		for (int k = 0; k < shootGrid.get(i).size(); k ++) {
+                 			if (shootGrid.get(i).get(k) != null && !shootGrid.get(i).get(k)) {
+                 				shouldSpawn = true;
+                 				break;
+                 			}
+                 		}
+                 	}
+                 	
+                 	while (shouldSpawn == true) {
+                 		int row = random.nextInt(2) + 1;  // random.nextInt(2) + 3;
+                         int col = random.nextInt(6) + 1;
+                         
+                         if (grid.get(row).get(col) != null && !grid.get(row).get(col)) {
+                         	handler.getGalagaState().entityManager.entities.add(new NewEnemy(10, 10, 30, 30, handler, row, col));
+                         	shouldSpawn = false;
+                         }
+                         
+                 	}
+
+                 }
+                 
+                 // Summon HeMan
+                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_T)) {
+
+             		List<List<Boolean>> grid = handler.getGalagaState().getGalagaGrid();
+             		
+             		// He-Man can only spawn in the first row
+             		boolean shouldSpawn = false;
+             		
+             		// Check if the first row is empty
+             		for (int i = 0; i < grid.get(1).size(); i++) {
+             			if (grid.get(1).get(i) != null && !grid.get(1).get(i)) {
+             				shouldSpawn = true;
+             				break;
+             			}
+             		}
+             		
+             		// Check if He-Man already exists
+             		for (BaseEntity enemy : handler.getGalagaState().entityManager.entities) {
+             			if (enemy instanceof HeMan) {
+             				shouldSpawn = false;
+             				break;
+             			}
+             		}
+             		
+             		
+             		// Spawn He-Man
+             		while (shouldSpawn) {
+             			int col = random.nextInt(8);
+             			if (grid.get(1).get(col) != null && !grid.get(1).get(col)) {
+             				handler.getGalagaState().entityManager.entities.add(new HeMan(10, 10, 60, 80, handler, col));
+                         	handler.getMusicHandler().playEffect("heman.wav");	
+                         	shouldSpawn = false;
+             			}
+                 	}
+             	
+                 }
+                
+            }
+            
             // Gives a life to the player
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && Handler.DEBUG) {
-            	if (health < 3) {
-            		health ++ ; 
-            	}
-            }
-            // Initiates GameOver Sequence
-            if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_U) && Handler.DEBUG) {
-            	handler.getGalagaState().Mode = "GameOver";
-            	handler.getMusicHandler().changeMusic("LegendGameOver.wav");
-            }
-            
-            // Kills the player
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_N) && Handler.DEBUG) {
-            	invulnerableCooldown = 0;
-            	damage(null);
-            }
-            
-            // Gives 100 to the player
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_1) && Handler.DEBUG) {
-            	handler.getScoreManager().setGalagaCurrentScore(handler.getScoreManager().getGalagaCurrentScore() + 100); 
-            }
-            
-            // Kill all enemies
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_X) && Handler.DEBUG) {
-            	for (BaseEntity enemy : handler.getGalagaState().entityManager.entities) {
-            		enemy.playerDamage = false;
-            		enemy.playSound = false;
-            		enemy.damage(new PlayerLaser(0,0,0,0, Images.galagaPlayerLaser, handler, handler.getGalagaState().entityManager));
-            	}
-            }
            
           //Sends player to pause State
             if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
             	handler.getMusicHandler().changeMusic("ChemicalPlantPause.wav");
             	State.setState(handler.getPauseState());
             }
-            
-            // Spawns a Bee to a random unoccupied spot
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_P) && Handler.DEBUG) {
-            	
-            	// Get the grid of the bee
-            	List<List<Boolean>> grid = handler.getGalagaState().getGalagaGrid();
-            	List<List<Boolean>> beeGrid = grid.subList(3,5);
-            	boolean shouldSpawn = false;
-            	
-            	// Check if the bee should be able to spawn
-            	for (int i = 0; i < beeGrid.size(); i ++) {
-            		for (int k = 0; k < beeGrid.get(i).size(); k ++) {
-            			if (beeGrid.get(i).get(k) != null && !beeGrid.get(i).get(k)) {
-            				shouldSpawn = true;
-            				break;
-            			}
-            		}
-            	}
-            	
-            	while (shouldSpawn == true) {
-            		int row = random.nextInt(2) + 3;
-                    int col = random.nextInt(8); 
-                    
-                    if (grid.get(row).get(col) != null && !grid.get(row).get(col)) {
-                    	handler.getGalagaState().entityManager.entities.add(new EnemyBee(10, 10, 30, 30, handler, row, col));
-                    	shouldSpawn = false;
-                    }
-                    
-            	}
-            	
-            }  
-            
-            // Summon New Enemy
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_O) && Handler.DEBUG) {
-            	
-            	// Get the grid for the new enemy
-            	List<List<Boolean>> grid = handler.getGalagaState().getGalagaGrid();
-            	List<List<Boolean>> shootGrid = grid.subList(1, 3);
-            	
-            	boolean shouldSpawn = false;
-            	
-            	// Check if the new enemy should be able to spawn
-            	for (int i = 0; i < shootGrid.size(); i ++) {
-            		for (int k = 0; k < shootGrid.get(i).size(); k ++) {
-            			if (shootGrid.get(i).get(k) != null && !shootGrid.get(i).get(k)) {
-            				shouldSpawn = true;
-            				break;
-            			}
-            		}
-            	}
-            	
-            	while (shouldSpawn == true) {
-            		int row = random.nextInt(2) + 1;  // random.nextInt(2) + 3;
-                    int col = random.nextInt(6) + 1;
-                    
-                    if (grid.get(row).get(col) != null && !grid.get(row).get(col)) {
-                    	handler.getGalagaState().entityManager.entities.add(new NewEnemy(10, 10, 30, 30, handler, row, col));
-                    	shouldSpawn = false;
-                    }
-                    
-            	}
 
-            }
             
             
             // Give a free health for every 10000 points on the secret Baby Mode
