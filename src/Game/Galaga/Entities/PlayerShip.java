@@ -72,33 +72,6 @@ public class PlayerShip extends BaseEntity{
                 x += (speed);
             }
             
-
-            // Debug keys
-            
-          //Test KirbyAttack
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_K) && Handler.DEBUG) {
-            	if (handler.getScoreManager().getGalagaCurrentScore() >= 2000) {
-            		handler.getScoreManager().setGalagaCurrentScore(handler.getScoreManager().getGalagaCurrentScore()-2000);
-            	handler.getMusicHandler().playEffect("KirbyWarpStar.wav");
-            	
-            	for (BaseEntity enemy : handler.getGalagaState().entityManager.entities) {
-            		if (enemy instanceof KirbyAttack) {
-            			if ( ((KirbyAttack) enemy).direction == 1 ) {
-            				((KirbyAttack) enemy).direction = 0;
-            			}
-            			else {
-            				((KirbyAttack) enemy).direction = 1;
-            			}
-            		}
-            	}
-            	
-            	int direction = random.nextInt(2);
-                int KirbyX = direction == 1 ? handler.getWidth() - 10 : 10;
-                int KirbyY =  ((random.nextInt(4) + 1) *(handler.getHeight()/10))+8;
-        		handler.getGalagaState().entityManager.entities.add(new KirbyAttack(KirbyX ,KirbyY, width, height, Images.KirbyPowerUp[0], handler, handler.getGalagaState().entityManager));
-            }
-
-            }
    
             
             //Prevents Negative life You need to remember to be positive in the face of adversity
@@ -112,24 +85,24 @@ public class PlayerShip extends BaseEntity{
                  	}
                  }
                  // Initiates GameOver Sequence
-                 if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_U)) {
+            	 else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_U)) {
                  	handler.getGalagaState().Mode = "GameOver";
                  	handler.getMusicHandler().changeMusic("LegendGameOver.wav");
                  }
                  
                  // Kills the player
-                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)) {
+            	 else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)) {
                  	invulnerableCooldown = 0;
                  	damage(null);
                  }
                  
                  // Gives 100 to the player
-                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_1)) {
+            	 else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_1)) {
                  	handler.getScoreManager().setGalagaCurrentScore(handler.getScoreManager().getGalagaCurrentScore() + 100); 
                  }
                  
                  // Kill all enemies
-                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_X)) {
+            	 else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_X)) {
                  	for (BaseEntity enemy : handler.getGalagaState().entityManager.entities) {
                  		enemy.playerDamage = false;
                  		enemy.playSound = false;
@@ -137,9 +110,36 @@ public class PlayerShip extends BaseEntity{
                  	}
                  }
                  
+                 // Debug keys
+                 
+                 //Test KirbyAttack
+            	 else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_K)) {
+                   	if (handler.getScoreManager().getGalagaCurrentScore() >= 2000) {
+                   		handler.getScoreManager().setGalagaCurrentScore(handler.getScoreManager().getGalagaCurrentScore()-2000);
+                   	handler.getMusicHandler().playEffect("KirbyWarpStar.wav");
+                   	
+                   	for (BaseEntity enemy : handler.getGalagaState().entityManager.entities) {
+                   		if (enemy instanceof KirbyAttack) {
+                   			if ( ((KirbyAttack) enemy).direction == 1 ) {
+                   				((KirbyAttack) enemy).direction = 0;
+                   			}
+                   			else {
+                   				((KirbyAttack) enemy).direction = 1;
+                   			}
+                   		}
+                   	}
+                   	
+                   	int direction = random.nextInt(2);
+                       int KirbyX = direction == 1 ? handler.getWidth() - 10 : 10;
+                       int KirbyY =  ((random.nextInt(4) + 1) *(handler.getHeight()/10))+8;
+               		handler.getGalagaState().entityManager.entities.add(new KirbyAttack(KirbyX ,KirbyY, width, height, Images.KirbyPowerUp[0], handler, handler.getGalagaState().entityManager));
+                   }
+
+                   }
+                 
                  
                  // Spawns a Bee to a random unoccupied spot
-                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)) {
+            	 else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)) {
                  	
                  	// Get the grid of the bee
                  	List<List<Boolean>> grid = handler.getGalagaState().getGalagaGrid();
@@ -170,7 +170,7 @@ public class PlayerShip extends BaseEntity{
                  }  
                  
                  // Summon New Enemy
-                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_O)) {
+            	 else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_O)) {
                  	
                  	// Get the grid for the new enemy
                  	List<List<Boolean>> grid = handler.getGalagaState().getGalagaGrid();
@@ -202,7 +202,7 @@ public class PlayerShip extends BaseEntity{
                  }
                  
                  // Summon HeMan
-                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_T)) {
+            	 else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_T)) {
 
              		List<List<Boolean>> grid = handler.getGalagaState().getGalagaGrid();
              		
@@ -239,21 +239,20 @@ public class PlayerShip extends BaseEntity{
                  }
                 
             }
-            
-            // Gives a life to the player
            
           //Sends player to pause State
             if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
             	handler.getMusicHandler().changeMusic("ChemicalPlantPause.wav");
-            	State.setState(handler.getPauseState());
+            	handler.changeState(handler.getPauseState());
             }
 
             
             
             // Give a free health for every 10000 points on the secret Baby Mode
             for (int i = 10000; i <= handler.getScoreManager().getGalagaCurrentScore(); i += 10000) {
-            	if ( handler.getScoreManager().getGalagaCurrentScore() - i == 0 && handler.getGalagaState().difficulty.equals("baby") && health < 3) {
+            	if ( handler.getScoreManager().getGalagaCurrentScore() == i  && handler.getGalagaState().difficulty.equals("baby") && health < 3) {
             		health++;
+            		break;
             	}
             }
             
