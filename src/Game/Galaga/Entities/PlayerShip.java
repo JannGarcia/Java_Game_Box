@@ -54,14 +54,12 @@ public class PlayerShip extends BaseEntity{
                     attackCooldown--;
                 }
             }
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && !attacking) {
+            if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) && !attacking){
                 handler.getMusicHandler().playEffect("laser.wav");
                 
                 
                 // If baby mode, reduce cooldown, if hard, increase, otherwise keep at 30
                 attackCooldown = (handler.getGalagaState().difficulty.equals("baby")) ? 15 : (handler.getGalagaState().difficulty.equals("hard")) ? 60:30;
-                
-                
                 attacking = true;
                 handler.getGalagaState().entityManager.entities.add(new PlayerLaser(this.x + (width / 2), this.y - 3, width / 5, height / 2, Images.galagaPlayerLaser, handler, handler.getGalagaState().entityManager));
 

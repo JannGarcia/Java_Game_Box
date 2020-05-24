@@ -111,6 +111,7 @@ public class GameState extends State {
                 if (handler.getState() == handler.getGameState()) {
                     handler.getMouseManager().setUimanager(null);
                     handler.getZeldaGameState().refresh();
+                    handler.getZeldaIntroState().refresh();
                     handler.getMusicHandler().changeMusic("intro.wav");
                     handler.changeState(handler.getZeldaIntroState());
                 }
