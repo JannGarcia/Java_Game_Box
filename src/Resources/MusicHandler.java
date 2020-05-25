@@ -28,8 +28,8 @@ public class MusicHandler {
                 clip.open(inputStream);
                 clip.loop(-1);
                 clip.start();
-                currentSong = fileName;
                 handler.setBackgroundMusic(clip);
+                currentSong = fileName;
                 handler.setMute(false);
             } catch (Exception e) {
                // System.err.println(e.getMessage());
@@ -71,13 +71,13 @@ public class MusicHandler {
 
     public void changeMusic(String fileNmae){
         stopMusic();
-        lastSong = this.currentSong;
         startMusic(fileNmae);
     }
 
     public void stopMusic() {
         try {
             handler.getBackgroundMusic().stop();
+            lastSong = this.currentSong;
             handler.getBackgroundMusic().close();
         } catch (Exception e) {
            // System.err.println(e.getMessage());

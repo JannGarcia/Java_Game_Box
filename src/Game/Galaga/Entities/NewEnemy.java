@@ -53,7 +53,7 @@ public class NewEnemy extends Enemy {
 
     
     public void attack() {
-        handler.getGalagaState().entityManager.shoot.add(new EnemyLaser(this.x + (width / 2), this.y + 3, width / 5, height / 2, Images.galagaPlayerLaser, handler, handler.getGalagaState().entityManager));
+        handler.getGalagaState().entityManager.shoot.add(new EnemyLaser(this.x + (width / 2), this.y + 3, width / 5, height / 2, Images.flipVertical(Images.galagaPlayerLaser), handler, handler.getGalagaState().entityManager));
     }
 }
 

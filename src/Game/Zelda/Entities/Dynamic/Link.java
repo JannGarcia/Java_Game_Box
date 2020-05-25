@@ -52,7 +52,7 @@ public class Link extends BaseMovingEntity {
 	public boolean hasSword = false, hasSecondSword = false, hasFinalSword = false;
 	Direction movingTo;
 
-	public int potions = 3, rupees = 300, arrows = 20, keys = 2;
+	public int potions = 2, rupees = 0, arrows = 20, keys = 0;
 
 	public Link(int x, int y, BufferedImage[] sprite, Handler handler) {
 		super(x, y, sprite, handler);
