@@ -45,6 +45,9 @@ public class GalagaState extends State {
 
     @Override
     public void tick() {
+    	 if ( entityManager.playerShip.getHealth() <= 0) {
+         	Mode = "GameOver";
+         } 
         if (Mode.equals("Stage")){
 
         	if (startCooldown<=0) {
@@ -57,12 +60,6 @@ public class GalagaState extends State {
                 if (entityManager.entities.isEmpty()) {
                 	noEnemies = true;
                 }
-                
-           	 if ( entityManager.playerShip.getHealth() <= 0 && entityManager.playerShip.deathAnimation.end) {
-               	handler.getMusicHandler().changeMusic("LegendGameOver.wav");
-              	Mode = "GameOver";
-              	return;
-              } 
     
                 for (BaseEntity enemy : entityManager.entities) {
                 	if (enemy instanceof EnemyBee || enemy instanceof NewEnemy) {

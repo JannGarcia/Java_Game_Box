@@ -115,7 +115,7 @@ public class HeMan extends BaseEntity {
 
                 	playerDamage = false;
                 	playSound = false;
-                	damage(new PlayerLaser(0,0,0,0, Images.flipVertical(Images.galagaPlayerLaser), handler, handler.getGalagaState().entityManager));
+                	damage(new PlayerLaser(0,0,0,0, Images.galagaPlayerLaser, handler, handler.getGalagaState().entityManager));
                 	
                 }
 
@@ -150,7 +150,7 @@ public class HeMan extends BaseEntity {
 
                 	playerDamage = false;
                 	playSound = false;
-                	damage(new PlayerLaser(0,0,0,0, Images.flipVertical(Images.galagaPlayerLaser), handler, handler.getGalagaState().entityManager));
+                	damage(new PlayerLaser(0,0,0,0, Images.galagaPlayerLaser, handler, handler.getGalagaState().entityManager));
                 }
             }
         }else if (positioned){
@@ -161,13 +161,13 @@ public class HeMan extends BaseEntity {
         		int playerX = handler.getGalagaState().entityManager.playerShip.x;
         		playerX += handler.getGalagaState().entityManager.playerShip.width / 2;
         		
-                handler.getGalagaState().entityManager.shoot.add(new EnemyLaser(playerX, 0, width / 5, height / 2, Images.flipVertical(Images.galagaPlayerLaser), handler, handler.getGalagaState().entityManager));
+                handler.getGalagaState().entityManager.shoot.add(new EnemyLaser(playerX, 0, width / 5, height / 2, Images.galagaPlayerLaser, handler, handler.getGalagaState().entityManager));
         	}
         	
         	// Attack in the last 5 seconds
         	if (waitCooldown == 5 * 60) {
         		for (int i = 0; i < handler.getWidth(); i += (120 + random.nextInt(60))) {
-                    handler.getGalagaState().entityManager.shoot.add(new EnemyLaser(i, 0, width / 5, height / 2, Images.flipVertical(Images.galagaPlayerLaser), handler, handler.getGalagaState().entityManager));
+                    handler.getGalagaState().entityManager.shoot.add(new EnemyLaser(i, 0, width / 5, height / 2, Images.galagaPlayerLaser, handler, handler.getGalagaState().entityManager));
        	     }
         		
         	}
@@ -196,7 +196,7 @@ public class HeMan extends BaseEntity {
         	// Summon 5 lasers
         	if (soundCooldown == 0 && attackType == 0) {
         	     for (int i = 0; i < handler.getWidth(); i += (120 + random.nextInt(35))) {
-                     handler.getGalagaState().entityManager.shoot.add(new EnemyLaser(i, 0, width / 5, height / 2, Images.flipVertical(Images.galagaPlayerLaser), handler, handler.getGalagaState().entityManager));
+                     handler.getGalagaState().entityManager.shoot.add(new EnemyLaser(i, 0, width / 5, height / 2, Images.galagaPlayerLaser, handler, handler.getGalagaState().entityManager));
         	     }
         	     soundCooldown = 6 * 60;
                  waitCooldown = handler.getGalagaState().difficulty.equals("hard") ? (random.nextInt(6 * 60)) + 5 * 60 : (random.nextInt(13 * 60)) + 5 * 60;

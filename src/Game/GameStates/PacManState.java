@@ -154,27 +154,24 @@ public class PacManState extends State {
                         handler.getMap().getEnemiesOnMap().remove(removing);
                     }
 
-                    if (Handler.DEBUG) {
-                        // debug commands
-                        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_N) && handler.getPacman().health < 3)  {
-                            handler.getPacman().health++; // add health up to a max of 3
-                        } else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_P) && handler.getPacman().health > 0) {
-                            handler.getPacman().hit = true; // kill pacman
-                        } else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)) {
-                            addGhosts(1, true);  // Add ghost
-                        }
-
-                        // Auto Level Up
-                        else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
-                            Mode = "LevelUp";
-                            resetHeMan();
-                            return;
-                        } else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_K)) {
-                            Mode = "GameOver";
-                            return;
-                        }
+                    // debug commands
+                    if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_N) && handler.getPacman().health < 3 && Handler.DEBUG) {
+                        handler.getPacman().health++; // add health up to a max of 3
+                    } else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_P) && handler.getPacman().health > 0 && Handler.DEBUG) {
+                        handler.getPacman().hit = true; // kill pacman
+                    } else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_C) && Handler.DEBUG) {
+                        addGhosts(1, true);  // Add ghost
                     }
 
+                    // Auto Level Up
+                    else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && Handler.DEBUG) {
+                        Mode = "LevelUp";
+                        resetHeMan();
+                        return;
+                    } else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_K) && Handler.DEBUG) {
+                        Mode = "GameOver";
+                        return;
+                    }
 
 
                     if (heManCanSpawn) {
@@ -345,15 +342,6 @@ public class PacManState extends State {
     @Override
     public void refresh() {
         handler.getMap().reset();
-        
-        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)) {
-            this.level = 1;
-            if (handler.getScoreManager().getPacmanCurrentScore() > handler.getScoreManager().getPacmanHighScore()) {
-                handler.getScoreManager().setPacmanHighScore(handler.getScoreManager().getPacmanCurrentScore());
-            }
-            handler.getScoreManager().setPacmanCurrentScore(0);
-        }
-
         ghostCount = 0;
         startCooldown = 60 * 4;
         spawnCooldown = 0;
