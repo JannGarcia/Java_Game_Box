@@ -29,7 +29,7 @@ public class GalagaState extends State {
     public int startCooldown = 60*7;//seven seconds for the music to finish
     public int spawnCooldown = 60 * 5; // start to spawn enemies after 5 seconds of gameplay
     public boolean noEnemies = true; // Variable to check if enemies are spawned
-    public boolean startMusic = false, runOnce =  false;
+    public boolean changeMusic = false, runOnce =  false;
     public int randomNum;
     private boolean champion = false, silver = false, bronze = false;
     private boolean showChampionPrompt = true, showSilverPrompt = true, showBronzePrompt = true;
@@ -83,20 +83,21 @@ public class GalagaState extends State {
                 	shootersToSpawn = handler.getGalagaState().difficulty.equals("hard") ? 12 : random.nextInt(3) + 3; // 3 - 5 Shooters
                 	noEnemies = false;
                 	
-                	if (Mode == "Stage" && startCooldown <= 0 && startMusic == false) {
+                	if (Mode == "Stage" && startCooldown <= 0 && changeMusic == false) {
                 		
                 		if (difficulty.equals("hard")) {
-                			handler.getMusicHandler().startMusic("hrdmode.wav");
+                			//handler.getMusicHandler().changeMusic("final.wav");
+                			handler.getMusicHandler().changeMusic(random.nextInt(4) != 0 ? "hrdmode.wav" : "final.wav");
                 		}
                 		
                 		else if (difficulty.equals("baby")) {
-                			handler.getMusicHandler().startMusic("TomboyishBabyMode.wav");
+                			handler.getMusicHandler().changeMusic("TomboyishBabyMode.wav");
                 		}
 
                 		else {
-                			handler.getMusicHandler().startMusic("BigBlueArena.wav");
+                			handler.getMusicHandler().changeMusic("BigBlueArena.wav");
                 		}
-                      	startMusic = true;
+                      	changeMusic = true;
                       	
                 	}
                 	
@@ -464,7 +465,7 @@ public class GalagaState extends State {
         startCooldown = 60 * 7;
         spawnCooldown = 60 * 5;
         noEnemies = true;
-        startMusic = false;
+        changeMusic = false;
         this.Mode = "Menu";
         grid = initGalagaGrid();
     }

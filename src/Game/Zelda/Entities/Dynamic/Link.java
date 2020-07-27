@@ -694,6 +694,7 @@ public class Link extends BaseMovingEntity {
 					else if(item.getName().contentEquals("arrow")) {
 						this.arrows += 5;
 						handler.getZeldaGameState().pickUp(objects);
+						handler.getMusicHandler().playEffect("heart.wav");
 					}
 					
 					else if(item.getName().contentEquals("potion")) {
